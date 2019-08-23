@@ -2,11 +2,30 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <a href="#" @click="logout">Logout</a>
     </div>
     <router-view/>
+    <!-- set progressbar -->
+    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
+
+<script>
+import firebase from 'firebase';
+
+export default {
+  methods:{
+    logout() {
+      firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+      }).catch(function(error) {
+        // An error happened.
+      });
+    }
+  }
+}
+</script>
+
 
 <style>
 #app {
@@ -18,6 +37,9 @@
 }
 #nav {
   padding: 30px;
+  background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+
+  
 }
 
 #nav a {
@@ -26,6 +48,6 @@
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #fff;
 }
 </style>
